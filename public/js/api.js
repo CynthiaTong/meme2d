@@ -16,7 +16,8 @@ $(document).ready(function() {
     });
 
     $("#initBtn").click(function() {
-    	var picArray = ["../media/triangle.png", "../media/rect.png", "../media/pentagon.png", "../media/trapezoid.png", "../media/paral.png"];
+    	
+    	var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
 		var picCount = 0;
 
 		//display every img in the picArray 
