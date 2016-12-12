@@ -7,17 +7,6 @@ html, body, canvas {
 /*    overflow:hidden;*/
 }
 
-#preloadImages {
-    width: 0px;
-    height: 0px;
-    display: none;
-    background-image: url("/media/triangle.png");
-    background-image: url("/media/rect.png");
-    background-image: url("/media/pentagon.png");
-    background-image: url("/media/trapezoid.png");
-    background-image: url("/media/paral.png");
-}
-
 #initBtn {
 	position:absolute;
 	align-content: center;
@@ -87,12 +76,25 @@ a, a:focus{
     border:0 none !important;
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: rgb(128, 128, 128);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: rgb(128, 128, 128);
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: rgb(128, 128, 128);
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: rgb(128, 128, 128);
+}
+
 #msgArea {
 	position: absolute;
 	align-content: center;
-	left: 20%;
+	left: 25%;
 	top: 2%;
-	width: 60%;
+	width: 50%;
 	height: 95%;
 	border-style: solid;
 	border-color: rgb(230, 240, 255);
@@ -113,7 +115,7 @@ img{
 #img-display {
 	align-self: center;
 	position: relative;
-	left: 20%;
+	left: 15%;
 	top: 5%;  
 	width:90%;
 /*	height: 100%;*/
@@ -124,22 +126,28 @@ img{
 #msg-content {
 	margin-top: 40px;
 	margin-bottom: 5px;	
-	margin-left: 80px;
-	width: 80%;
+	margin-left: 18%;	
+	width: 60%;
 	height: 1.2em;
 	font-size:1em;
 	text-align: center;
-	border: none;
+	border: white solid;
+	border-radius: 5%;
+	border-width: 2px;
+	background: rgba(255, 255, 255, 0.5);
 }
 
 #msg-content2 {
 	margin: 5px 40px;
-	margin-left: 80px;	
-	width: 80%;
+	margin-left: 18%;	
+	width: 60%;
 	height: 1.2em;
 	font-size:1em;
 	text-align: center;
-	border: none;
+	border: white solid;
+	border-radius: 5%;
+	border-width: 2px;
+	background: rgba(255, 255, 255, 0.5);
 }
 
 #username {
@@ -148,22 +156,26 @@ img{
 	height: 1.2em;
 	text-align: center;
 	font-size:1em;
-	border: none;
-
+	border: black solid;
+	border-radius: 5%;
+	border-width: 2px;
+	background: rgba(255, 255, 255, 0.5);
 }
 
 #msg-submit {
-	border-radius: 20%;
-	margin-left: 35%;
+	margin-left: 32%;
 	font-size:1em;
-	border: none;
-	background-color: white;
+	border: black solid;
+	border-radius: 20%;
+	border-width: 2px;
+	background-color: Transparent;
     color: black;
     padding: 3px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-
+    cursor: pointer;
+    outline: none;
 }
 
 #updateCount {
@@ -174,11 +186,15 @@ img{
 }
 
 #back-to-page {
+	text-decoration: none;
+	border: none;	
+	outline:none;
+	background:none;
 	position: relative;
 	left: 90%;
-	top: 5%;
+	top: 10px;
 	height: 5%;
 	text-align: center;
 	font-size:1em;
-	border: none;
+	cursor: pointer;
 }

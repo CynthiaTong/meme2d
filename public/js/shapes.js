@@ -56,6 +56,7 @@ function Trapezoid(x, y) {
   this.n = 0;
   // Drawing the box
   this.display = function() {
+
 	// Get the body's position
 	var pos = scaleToPixels(this.body.GetPosition());
 	// Get its angle of rotation

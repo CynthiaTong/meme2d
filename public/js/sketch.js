@@ -60,28 +60,38 @@ function mousePressed() {
 
 				if (frameCount - last < 20) {
 					var data;
-					if (dataObj[shape[j].num]) { 
-						//find the correct img link 
-						data = dataObj[shape[j].num].memeInfo.link;
+					if (objArray[shape[j].num] !== undefined) {
+						console.log(objArray[shape[j].num]);
+						console.log(shape[j].num);
+						if (objArray[shape[j].num].num === shape[j].num) { 
+							//find the correct img link 
+							data = objArray[shape[j].num].memeInfo.link;
 
-						//pass update count to shape 
-						var updateTimes = dataObj[shape[j].num].updated;
-						shape[j].n = updateTimes;
+							//pass update count to shape 
+							var updateTimes = objArray[shape[j].num].updated;
+							shape[j].n = updateTimes;
 
-						if (updateTimes > 1) $("#updateCount").html("This meme has been updated <strong>"+ updateTimes +
-												 "</strong> times. See previous changes in the meme gallery!" +
-												 "<br> Look! Its shape just got a bit bigger due to your update :).");
-						else $("#updateCount").html("This meme has been updated <strong>1</strong> time." +
-												 "<br> Look! Its shape just got a bit bigger due to your update :).");
+							if (updateTimes > 1) $("#updateCount").html("This meme has been updated <strong>"+ updateTimes +
+													 "</strong> times. See previous changes in the meme gallery!" +
+													 "<br> Look! Its shape just got a bit bigger due to your update :).");
+							else if (updateTimes = 1) $("#updateCount").html("This meme has been updated <strong>1</strong> time." +
+													 "<br> Look! Its shape just got a bit bigger due to your update :).");
+							else $("#updateCount").html("This sad meme has <strong>never</strong> been updated. Give it some attention by adding texts!");
+							
 
+						// } else { 	
+						// console.log(objArray);
+						// // console.log(dataObj);
+						// console.log(objArray[shape[j].num]);
+						// // console.log(shape[j].num);
+						// data = memesArray[shape[j].num].link;
+						// $("#updateCount").html("This sad meme has <strong>never</strong> been updated. Give it some attention by adding texts!");
+						}
 					}
-					else { 
-						data = memesArray[shape[j].num].link;
-						$("#updateCount").html("This sad meme has <strong>never</strong> been updated. Give it some attention by adding texts!");
-					}
+					
 			  		$("#img-display").attr("src", data);
 
-			  		$("#msgArea").css("background-color", shape[j].color);
+			  		$("#msgArea").css({"background-color": shape[j].color});
 			  		$("#msgArea").fadeIn(500);
 			  		$("#clickGuide").hide();
 					$("#selectArea").removeClass("disabled");

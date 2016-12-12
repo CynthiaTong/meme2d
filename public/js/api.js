@@ -4,7 +4,7 @@ $(document).ready(function() {
 	getMemes();
 
 	clickCount = -1;
-	var objArray = [];
+	// var objArray = [];
 
 	//a flag to indicate if refreshImg is paused 
 	var isPaused = false;
@@ -19,24 +19,41 @@ $(document).ready(function() {
 
     $("#initBtn").click(function() {
 
-		var picCount = 0;
+  //   	// function cycleImg() {
+		// 	var picCount = 0;
 
-		//display every img in the picArray 
-		var refreshImg = setInterval(function() {
+		// //display every img in the picArray 
+		// var refreshImg = setInterval(function() {
 
-			if (!isPaused) {
-				$(".pics").attr("src", picArray[picCount]);
-				$(".pics").attr("id", picCount);
-				// console.log($(".pics").attr("id"));
-				++picCount; 
-				if (picCount > 4) {
-					picCount = 0;
-				}
-			}
-		}, 120);	
-		//120
+		// 	if (!isPaused) {
+		// 		$(".pics").attr("src", picArray[picCount]);
+		// 		$(".pics").attr("id", picCount);
+		// 		// console.log($(".pics").attr("id"));
+		// 		++picCount; 
+		// 		if (picCount > 4) {
+		// 			picCount = 0;
+		// 		}
+		// 	}
+		// }, 120);	
+		// 120
+			// setTimeout(function() {
+			// 	cycleImg();
+			// }, 120);
+		// }
+
+		if (!isPaused) {
+			var counter = 0;
+
+			setInterval(function() {
+				$(".pics").hide();
+				$("#"+counter).show();
+
+				++counter;
+				if (counter > 4) counter = 0;
+			}, 120);
+		}
+		
     });
-
 
 	$("#selectArea").click(function() {
 		// getQuotes();
@@ -98,7 +115,7 @@ $(document).ready(function() {
 			getUpdatedMemes(obj);
 
 		}else {
-			alert("Please enter your name and the text.");
+			alert("Please enter your name and the texts.");
 		}
 	});
 
@@ -146,7 +163,8 @@ function getMemes() {
 	    	// console.log(memesArray);
 	    },
 	    error: function(err) { 
-	    	console.log(err); 
+	    	console.log(err);
+	    	alert("Sorry, data is not ready. Refresh please."); 
 	    },
 	});
 }
@@ -200,21 +218,21 @@ function getUpdatedMemes(d){
 
 			d.memeInfo.link = data;
 			//increase the update count 
-			d.updated += 1;
-			//post to cloudant  
-			postMemes(d);
 
+			d.updated += 1;
 
 			var inObj = false;
 			//if the meme is already in dataObj array, update the original 
-			for (var i=0; i < dataObj.length; ++i) {
-				if (d.memeInfo.id === dataObj[i].memeInfo.id) {
-					dataObj[i] = d;
+			for (var i=0; i < objArray.length; ++i) {
+				if (d.memeInfo.id === objArray[i].memeInfo.id) {
+					objArray[i] = d;
 					inObj = true;
 				}
 			}
 			// if not exist in array, add it 
-			if (!inObj) dataObj.push(d);
+			if (!inObj) objArray.push(d);
+			//post to cloudant  
+			postMemes(d);
 
 			//display update count 
 			if (d.updated > 1) $("#updateCount").html("This meme has been updated <strong>"+ d.updated + "</strong> times. See previous changes in the meme gallery!" + 
