@@ -7,6 +7,17 @@ html, body, canvas {
 /*    overflow:hidden;*/
 }
 
+#preloadImages {
+    width: 0px;
+    height: 0px;
+    display: none;
+    background-image: url("/media/triangle.png");
+    background-image: url("/media/rect.png");
+    background-image: url("/media/pentagon.png");
+    background-image: url("/media/trapezoid.png");
+    background-image: url("/media/paral.png");
+}
+
 #initBtn {
 	position:absolute;
 	align-content: center;
