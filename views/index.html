@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+		<title>meme2D</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+
+
+		<link rel="apple-touch-icon" sizes="120x120" href="/media/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/media/favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/media/favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/media/favicons/manifest.json">
+		<link rel="mask-icon" href="/media/favicons/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+	</head>
+
+	<body>
+		<button id="initBtn">
+			<img src = "/media/shapes.png" width = "50" height = "50" />
+		</button>
+		<div id="selectArea" style = "display: none;">
+			<a href = "#" id= "triPic">	
+				<img class= "pics" width = "80" height = "80" />
+			</a>
+			<!-- </a>
+			<a href = "#" id= "triPic">	
+				<img src = "/media/triangle.png" width = "80" height = "80" />
+			</a>
+			<a href = "#" id= "rectPic">
+				<img src = "/media/rect.png" width = "90" height = "90" />
+			</a>
+			<a href = "#" id= "cirPic">
+				<img src = "/media/pentagon.png" width = "90" height = "90" />
+			</a>
+			<a href = "#" id= "trapPic">
+				<img src = "/media/trapezoid.png" width = "80" height = "80" />
+			</a>
+			<a href = "#" id= "paralPic">
+				<img src = "/media/paral.png" width = "80" height = "80" />
+			</a> -->
+			<!-- <p id="selectionGuide">Hey, click on one shape above, then wait till something falls down :)</p>
+			<p id="clickGuide" style = "display: none;">Or, doubleclick on one shape below, then wait till something shows up :D</p> -->
+
+		</div>
+
+		<div id="msgArea" style = "display: none;">
+			<input type="button" value="Back" id="back-to-page"/>
+			<p id="content-display"></p>
+			<img id="img-display" alt ="meme image">
+			<textarea name="msg" id="msg-content" placeholder="Top Text On the Above Meme"></textarea>
+			<textarea name="msg2" id="msg-content2" placeholder="Bottom Text On the Above Meme"></textarea>
+			<input type="text" name="username" id="username" placeholder="Your Name?"/>
+			<input type="button" value="Save" id="msg-submit" />
+			<p id="updateCount"></p>
+		</div>
+
+	<!-- 	<div id="dragGuide" style = "display: none;">Hey, try dragging this!</div> -->
+
+		<script>
+			var dataObj = [];
+			var memesArray = [];
+			var clickCount;
+			var backedToPage = false;
+		</script>
+
+		<script type="text/javascript" src="/lib/p5.js"></script>
+
+		<script type="text/javascript" src="/lib/box2d-html5.js"></script>
+		<script type="text/javascript" src="/lib/box2d-helper.js"></script>
+
+		<script type="text/javascript" src="/js/boundary.js"></script>
+		<script type="text/javascript" src="/js/shapes.js"></script>
+		<script type="text/javascript" src="/js/spring.js"></script>
+
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script type="text/javascript" src="/js/api.js"></script>
+		<script type="text/javascript" src="/js/sketch.js"></script>
+	</body>
+</html>
