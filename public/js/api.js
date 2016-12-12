@@ -15,44 +15,24 @@ $(document).ready(function() {
         if (keyCode == 27) $("#back-to-page").click();
     });
 
-    var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
+    // var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
 
     $("#initBtn").click(function() {
 
-  //   	// function cycleImg() {
-		// 	var picCount = 0;
+		var counter = 0;
 
-		// //display every img in the picArray 
-		// var refreshImg = setInterval(function() {
+		setInterval(function() {
+			if (!isPaused) {
 
-		// 	if (!isPaused) {
-		// 		$(".pics").attr("src", picArray[picCount]);
-		// 		$(".pics").attr("id", picCount);
-		// 		// console.log($(".pics").attr("id"));
-		// 		++picCount; 
-		// 		if (picCount > 4) {
-		// 			picCount = 0;
-		// 		}
-		// 	}
-		// }, 120);	
-		// 120
-			// setTimeout(function() {
-			// 	cycleImg();
-			// }, 120);
-		// }
-
-		if (!isPaused) {
-			var counter = 0;
-
-			setInterval(function() {
 				$(".pics").hide();
 				$("#"+counter).show();
+				shapeNum = counter;
 
 				++counter;
+			}
 				if (counter > 4) counter = 0;
 			}, 120);
-		}
-		
+				
     });
 
 	$("#selectArea").click(function() {
@@ -79,12 +59,12 @@ $(document).ready(function() {
 
 		//adjust img size to fit in the screen 
 		if (item.width > 800) {
-			$("#img-display").attr("width" , 800); 
-			$("#img-display").attr("height" , 800*1.0*item.height*1.0/item.width*1.0); 
+			$("#img-display").attr("width" , 700); 
+			$("#img-display").attr("height" , 700*1.0*item.height*1.0/item.width*1.0); 
 		}
-		if (item.height > 400) {
-			$("#img-display").attr("width" , 400*1.0*item.width*1.0/item.height*1.0); 
-			$("#img-display").attr("height" , 400);
+		if (item.height > 350) {
+			$("#img-display").attr("width" , 350*1.0*item.width*1.0/item.height*1.0); 
+			$("#img-display").attr("height" , 350);
 		}
 
 		//if all the memes are used, start from beginning 
@@ -134,6 +114,10 @@ $(document).ready(function() {
 		//resume refreshImg 
 		isPaused = false;
 	});
+
+	// $("#favPage").click(function() {
+	// 	getFavMemes();
+	// });
 });
 
 //get all the memes in an array 
@@ -161,6 +145,7 @@ function getMemes() {
 	    	}
 	    	// console.log("memes array:");
 	    	// console.log(memesArray);
+	    	memesArray = shuffle(memesArray);
 	    },
 	    error: function(err) { 
 	    	console.log(err);
@@ -222,7 +207,7 @@ function getUpdatedMemes(d){
 			d.updated += 1;
 
 			var inObj = false;
-			//if the meme is already in dataObj array, update the original 
+			//if the meme is already in  objArray, update the original 
 			for (var i=0; i < objArray.length; ++i) {
 				if (d.memeInfo.id === objArray[i].memeInfo.id) {
 					objArray[i] = d;
@@ -235,7 +220,7 @@ function getUpdatedMemes(d){
 			postMemes(d);
 
 			//display update count 
-			if (d.updated > 1) $("#updateCount").html("This meme has been updated <strong>"+ d.updated + "</strong> times. See previous changes in the meme gallery!" + 
+			if (d.updated > 1) $("#updateCount").html("This meme has been updated <strong>"+ d.updated + "</strong> times.<br> See previous changes in the meme gallery!" + 
 				 					"<br>Btw, its shape just got a bit bigger due to your update :).");
 			else $("#updateCount").html("<strong>You</strong> are the first person who gave text to this meme!" + 
 				 					"<br>Btw, its shape just got a bit bigger due to your update :).");
@@ -243,6 +228,42 @@ function getUpdatedMemes(d){
 	});
 }
 
+function getFavMemes() {
+
+	//return the ajax data 
+	return $.ajax({
+		url: '/api/favorites',
+		type: 'GET',
+		dataType: 'json',
+		error: function(data){
+			console.log(data);
+			alert("Cannot get data. Try refresh?");
+		},
+		success: function(data){
+			console.log("Got fav data");
+			// console.log(data);
+		}
+	});
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 //*** Unused code ***//
 

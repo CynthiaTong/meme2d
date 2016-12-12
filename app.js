@@ -36,9 +36,13 @@ var CLOUDANT_URL = "https://" + CLOUDANT_USERNAME + ".cloudant.com/" + CLOUDANT_
 // GET - route to load the main page
 app.get("/", function (req, res) {
 	console.log("In main route");
-	res.render('index');
+	res.render("index");
 });
 
+app.get("/favorites", function(req, res) {
+	console.log("In fav");
+	res.render("fav");
+});
 
 // POST - route to create a new meme.
 app.post("/post", function (request, response) {
@@ -63,6 +67,27 @@ app.post("/post", function (request, response) {
 			console.log('Error: '+ res.statusCode);
 			console.log(body);
 		}
+	});
+
+});
+
+app.get("/api/favorites", function(req, res) {
+
+	console.log('Making a db request for fav entries');
+	//Use the Request lib to GET the data in the CouchDB on Cloudant
+	Request.get({
+		url: CLOUDANT_URL + "/_all_docs?include_docs=true",
+		auth: {
+			user: CLOUDANT_KEY,
+			pass: CLOUDANT_PASSWORD
+		},
+		json: true
+	},
+	function (error, response, body){
+		// console.log(body.rows);
+		var theRows = body.rows;
+		//Send the data
+		res.json(theRows);
 	});
 
 });
@@ -108,7 +133,6 @@ app.get("/get/:key/:text/:text1", function(request, response) {
 app.get("*", function(req,res){
 	res.redirect("/");
 });
-
 
 var port = process.env.PORT || 3000; 
 app.listen(port);

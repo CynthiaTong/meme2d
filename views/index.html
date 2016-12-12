@@ -26,8 +26,8 @@
 				<img class= "pics" id= "3" src = "/media/trapezoid.png" width = "80" height = "80"/>
 				<img class= "pics" id= "4" src = "/media/paral.png" width = "80" height = "80" />
 			</a>
-			<!-- </a>
-			<a href = "#" id= "triPic">	
+
+		<!-- 	<a href = "#" id= "triPic">	
 				<img src = "/media/triangle.png" width = "80" height = "80" />
 			</a>
 			<a href = "#" id= "rectPic">
@@ -48,7 +48,7 @@
 		</div>
 
 		<div id="msgArea" style = "display: none;">
-			<button type="button" value="Back" id="back-to-page">
+			<button id="back-to-page">
 				<img src="/media/back.png" alt="back-to-page" witdth = "40" height = "40">
 			</button>
 			<p id="content-display"></p>
@@ -56,18 +56,22 @@
 			<textarea name="msg" id="msg-content" placeholder="Top Text On the Above Meme"></textarea>
 			<textarea name="msg2" id="msg-content2" placeholder="Bottom Text On the Above Meme"></textarea>
 			<input type="text" name="username" id="username" placeholder="Your Name?"/>
-			<input type="button" value="Save" id="msg-submit" />
+			<button id="msg-submit">
+			<img src="/media/submit.png" alt="submit" witdth = "30" height = "30">
+			</button>
 			<p id="updateCount"></p>
 		</div>
-
-	<!-- 	<div id="dragGuide" style = "display: none;">Hey, try dragging this!</div> -->
+		<div id="infoPages">
+			<a id="aboutPage" href="https://github.com/CynthiaTong/meme2d" target="_blank">About</a>
+			<a id="favPage" href="/favorites">Favorites</a>
+		</div>
 
 		<script>
-			var dataObj = [];
 			var memesArray = [];
+			var objArray = [];
 			var clickCount;
 			var backedToPage = false;
-			var objArray = [];
+			var shapeNum;
 		</script>
 
 		<script type="text/javascript" src="/lib/p5.js"></script>

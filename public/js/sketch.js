@@ -42,6 +42,29 @@ function setup() {
 	frameRate(60);
 }
 
+function draw() {
+	background(230, 240, 255);
+	//Time Step 
+	var timeStep = 1.0/30;
+	// 2nd and 3rd arguments are velocity and position iterations
+	world.Step(timeStep,10,10);	
+	//show terrain 
+	terrain.display();
+
+	//update wave 
+	// perlinWave();
+
+	if (init) {
+		displayShapes();
+	}
+
+	spring.update(mouseX,mouseY);
+	spring.display();
+
+	//update shape size based on update count 
+	updateSize();
+}
+
 // When the mouse is released delete the spring
 function mouseReleased() {
   	spring.destroy();
@@ -61,8 +84,8 @@ function mousePressed() {
 				if (frameCount - last < 20) {
 					var data;
 					if (objArray[shape[j].num] !== undefined) {
-						console.log(objArray[shape[j].num]);
-						console.log(shape[j].num);
+						// console.log(objArray[shape[j].num]);
+						// console.log(shape[j].num);
 						if (objArray[shape[j].num].num === shape[j].num) { 
 							//find the correct img link 
 							data = objArray[shape[j].num].memeInfo.link;
@@ -70,15 +93,13 @@ function mousePressed() {
 							//pass update count to shape 
 							var updateTimes = objArray[shape[j].num].updated;
 							shape[j].n = updateTimes;
+							// console.log(shape[j].n);
 
 							if (updateTimes > 1) $("#updateCount").html("This meme has been updated <strong>"+ updateTimes +
-													 "</strong> times. See previous changes in the meme gallery!" +
-													 "<br> Look! Its shape just got a bit bigger due to your update :).");
-							else if (updateTimes = 1) $("#updateCount").html("This meme has been updated <strong>1</strong> time." +
-													 "<br> Look! Its shape just got a bit bigger due to your update :).");
-							else $("#updateCount").html("This sad meme has <strong>never</strong> been updated. Give it some attention by adding texts!");
+													 "</strong> times.");
+							else if (updateTimes > 0) $("#updateCount").html("This meme has been updated <strong>1</strong> time.");
+							else $("#updateCount").html("This sad meme has <strong>never</strong> been updated. <br>Give it some attention by adding texts! ");
 							
-
 						// } else { 	
 						// console.log(objArray);
 						// // console.log(dataObj);
@@ -105,36 +126,13 @@ function mousePressed() {
 	last = frameCount;
 }
 
-function draw() {
-	background(230, 240, 255);
-	//Time Step 
-	var timeStep = 1.0/30;
-	// 2nd and 3rd arguments are velocity and position iterations
-	world.Step(timeStep,10,10);	
-	//show terrain 
-	terrain.display();
-
-	//update wave 
-	// perlinWave();
-
-	if (init) {
-		displayShapes();
-	}
-
-	spring.update(mouseX,mouseY);
-	spring.display();
-
-	//update shape size based on update count 
-	updateSize();
-}
-
 function updateSize() {
 
 	for (var i=0; i< shapes.length; ++i) {
 		var shape = shapes[i];
 		for (var j=0; j<shape.length; ++j) {
-			if (dataObj[shape[j].num]) { 
-				shape[j].n = dataObj[shape[j].num].updated;
+			if (objArray[shape[j].num]) { 
+				shape[j].n = objArray[shape[j].num].updated;
 			}
 		}
 	}
@@ -145,11 +143,10 @@ function selectShape() {
 	$("#initBtn").fadeOut(300);
 
 
-	$("#triPic").click(function() {
-		var chosenShape = $(".pics").attr("id");
-		// console.log(chosenShape);
+	$("#selectArea").click(function() {
+		// console.log(shapeNum);
 
-		if (chosenShape === "0") {
+		if (shapeNum === 0) {
 			var ts = new Triangle(mouseX, mouseY);
 			triangles.push(ts);
 			triangles[triangles.length-1].num = num;
@@ -159,7 +156,7 @@ function selectShape() {
 			$("#selectArea").addClass("disabled");
 			$("#updateCount").html("");
 
-		}else if (chosenShape === "1") {
+		}else if (shapeNum === 1) {
 			var bs = new Box(mouseX, mouseY);
 			boxes.push(bs);
 			boxes[boxes.length-1].num = num;
@@ -169,7 +166,7 @@ function selectShape() {
 			$("#selectArea").addClass("disabled");
 			$("#updateCount").html("");
 
-		}else if (chosenShape === "2") {
+		}else if (shapeNum === 2) {
 			var os = new Pentagon(mouseX, mouseY);
 			pentagons.push(os);
 			pentagons[pentagons.length-1].num = num;
@@ -179,7 +176,7 @@ function selectShape() {
 			$("#selectArea").addClass("disabled");
 			$("#updateCount").html("");
 
-		}else if (chosenShape === "3") {
+		}else if (shapeNum === 3) {
 			var trs = new Trapezoid(mouseX,mouseY);
 			trapezoids.push(trs);
 			trapezoids[trapezoids.length-1].num = num;
@@ -189,7 +186,7 @@ function selectShape() {
 			$("#selectArea").addClass("disabled");
 			$("#updateCount").html("");
 
-		}else if (chosenShape === "4") {
+		}else if (shapeNum === 4) {
 			var ps = new Parals(mouseX, mouseY);
 			parals.push(ps);
 			parals[parals.length-1].num = num;
@@ -208,35 +205,6 @@ function selectShape() {
 
 	init = true;
 }
-
-// var yInc = -20;
-//Change the hight (y value) based on the number of shapes added ? 
-// function perlinWave() {
-// 	// stroke(179, 209, 255);
-// 	// fill(179, 209, 255);
-
-// 	// beginShape();
-
-// 	// // if (yInc <= -(height*3/4)) {
-// 	// // 	yInc = 0.5;
-// 	// // }
-
-// 	// var xOff = 0.0;
-// 	// var y;
-
-// 	// for (var x=0; x< width+20; x+= 20) {
-// 	// 	y = map(noise(xOff, yOff), 0, 1, height,3*height/5);
-// 	// 	vertex(x,y);
-// 	// 	xOff += 0.05;	
-// 	// }
-
-// 	// yOff += 0.01;
-// 	// // yInc -= 0.1;
-
-//  //  	vertex(width, height);
-//  // 	vertex(0, height);
-//  //  	endShape(CLOSE);
-// }
 
 function displayShapes() {
 
@@ -323,129 +291,31 @@ function windowResized() {
 	terrain = new Terrain();
 }
 
+// var yInc = -20;
+//Change the hight (y value) based on the number of shapes added ? 
+// function perlinWave() {
+// 	// stroke(179, 209, 255);
+// 	// fill(179, 209, 255);
 
-//*** Unused code ***//
+// 	// beginShape();
 
+// 	// // if (yInc <= -(height*3/4)) {
+// 	// // 	yInc = 0.5;
+// 	// // }
 
-//   for (var i = 0; i < boxes.length; ++i) {
+// 	// var xOff = 0.0;
+// 	// var y;
 
-//   	if (boxes[i].contains(mouseX, mouseY)) {
-//     // And if so, bind the mouse position to the box with a spring
-//     	spring.bind(mouseX, mouseY, boxes[i]);
+// 	// for (var x=0; x< width+20; x+= 20) {
+// 	// 	y = map(noise(xOff, yOff), 0, 1, height,3*height/5);
+// 	// 	vertex(x,y);
+// 	// 	xOff += 0.05;	
+// 	// }
 
-//     	if (frameCount - last < 20) {
-// 	      	boxes[i].data = dataObj[boxes[i].num];
-// 	      	console.log(boxes[i].data);
-// 	  		$("#img-display").attr("src", boxes[i].data.memeInfo.link);
-// 	  		var color = boxes[i].color;
+// 	// yOff += 0.01;
+// 	// // yInc -= 0.1;
 
-// 	  		$("#msgArea").css("background-color", "rgba("+color._array[0]+","+color._array[1]+","+color._array[2]+ ",0.2)");
-// 	  		console.log(boxes[i].color);
-// 	  		$("#msgArea").show();
-//   		}
-//   	}
+//  //  	vertex(width, height);
+//  // 	vertex(0, height);
+//  //  	endShape(CLOSE);
 // }
-
-//   for (var i = 0; i < trapezoids.length; ++i) {
-//   	if (trapezoids[i].contains(mouseX, mouseY)) {
-//     // And if so, bind the mouse position to the box with a spring
-//     	spring.bind(mouseX, mouseY, trapezoids[i]);
-//     	if (frameCount - last < 20) {
-// 	    	trapezoids[i].data = dataObj[trapezoids[i].num];
-// 	  		// console.log(boxes[i].data);
-// 	  		$("#img-display").attr("src", memesArray[clickCount].link || trapezoids[i].data.memeInfo.link);
-// 	  		$("#msgArea").css("background-color", trapezoids[i].color);
-// 	  		$("#msgArea").show();
-//   		}
-//   	}
-//   }
-
-//   for (var i = 0; i < parals.length; ++i) {
-//   	if (parals[i].contains(mouseX, mouseY)) {
-//     // And if so, bind the mouse position to the box with a spring
-//     	spring.bind(mouseX, mouseY, parals[i]);
-// 	    if (frameCount - last < 20) {
-// 	    	parals[i].data = dataObj[parals[i].num];
-// 	  		// console.log(boxes[i].data);
-// 	  		$("#img-display").attr("src", memesArray[clickCount].link || parals[i].data.memeInfo.link);
-// 	  		$("#msgArea").css("background-color", parals[i].color);
-// 	  		$("#msgArea").show();
-// 	  	}
-//   	}
-//   }
-
-//   for (var i = 0; i < triangles.length; ++i) {
-//   	if (triangles[i].contains(mouseX, mouseY)) {
-//     // And if so, bind the mouse position to the box with a spring
-//     	spring.bind(mouseX, mouseY, triangles[i]);
-// 	    if (frameCount - last < 20) {
-// 	    	triangles[i].data = dataObj[triangles[i].num];
-// 	  		// console.log(boxes[i].data);
-// 	  		$("#img-display").attr("src", memesArray[clickCount].link || triangles[i].data.memeInfo.link);
-// 		  	$("#msgArea").css("background-color", triangles[i].color);
-// 	  		$("#msgArea").show();
-// 	  	}
-//   	}
-//   }
-
-//   for (var i = 0; i < pentagons.length; ++i) {
-//   	if (pentagons[i].contains(mouseX, mouseY)) {
-//     // And if so, bind the mouse position to the box with a spring
-//     	spring.bind(mouseX, mouseY, pentagons[i]);
-// 	    if (frameCount - last < 20) {
-// 	    	pentagons[i].data = dataObj[pentagons[i].num];
-// 	  		// console.log(boxes[i].data);
-// 	  		$("#img-display").attr("src", memesArray[clickCount].link || pentagons[i].data.memeInfo.link);
-
-// 	  		$("#msgArea").css("background-color", pentagons[i].color);
-// 	  		$("#msgArea").show();
-// 	  	}
-//   	}
-//   }
-
-
-//-------------
-// function mousePressed() {
-
-// 	console.log(mouseX, mouseY);
-
-// 	if (mouseY < 200) {
-// 		if (mouseX < windowWidth/4) {
-// 		  var ts = new Trapezoid(mouseX,mouseY);
-// 		  trapezoids.push(ts);
-// 		}else if (mouseX < windowWidth/2) {
-// 		  var bs = new Box(mouseX, mouseY);
-// 		  boxes.push(bs);
-// 		}else if (mouseX < 3*windowWidth/4){
-// 		  var os = new Circle(mouseX, mouseY);
-// 		  circles.push(os);
-// 		} else {
-// 		  var ts = new Triangle(mouseX, mouseY);
-// 		  triangles.push(ts);
-// 		  var ts = new Parals(mouseX, mouseY);
-// 		  parals.push(ts);
-// 		}
-// 	}	
-// }
-
-// 	fill(26, 117, 255);
-	// 	textFont("Helvetica");
-	// 	textSize(20);
-	// 	text("Select a shape from below", width*0.42, height/10);
-		
-	// 	translate(width/4,height/8);
-	// 	strokeWeight(3);
-	// 	stroke(255);
-	// 	noFill();
-	// 	rect(0, 0, width/2, height/3);
-
-	// 	stroke(88, 46, 135);
-	// 	//shapes to choose from 
-	// 	rect(120,50,70,50);
-	// 	triangle(320,50, 380, 100, 290, 100);
-	// 	quad(480, 50, 520, 45, 580, 100, 470, 100);
-	// 	quad(120, 150, 190, 150, 220, 200, 150, 200);
-	// 	ellipse(330, 170, 70, 70);
-	// 	//display all shapes 
- //  	    // displayShapes();
-	// }

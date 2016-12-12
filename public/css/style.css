@@ -4,6 +4,7 @@ html, body, canvas {
     padding: 0;
     font-size: 20px;
     font-family: helvetica;
+    background-color: rgb(230, 240, 255);
 /*    overflow:hidden;*/
 }
 
@@ -20,7 +21,7 @@ html, body, canvas {
 	border-radius:20%;
 	border-style: dashed;
 	width:5%;
-	padding:5px;
+	padding:4px 3px;
 	font-size: 1em;
 	font-family: helvetica;
 	cursor:pointer;
@@ -37,20 +38,21 @@ html, body, canvas {
 	align-content: center;
 	left:45%;
 	top:30%;
-	-khtml-user-select: none;
-    -o-user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    padding: 20px 15px;
+    padding: 20px 15px 15px 15px;
     border: solid;
 	border-color:#3385ff;
 	border-radius:20%;
 	border-style: dashed;
     outline: none;
+
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-#selectionGuide {
+/*#selectionGuide {
 	position: relative;
 	left: -20px;
 	color: rgb(128, 128, 128);
@@ -60,7 +62,7 @@ html, body, canvas {
 	position: relative;
 	left: -37px;
 	color: rgb(128, 128, 128);
-}
+}*/
 
 a {
 	text-decoration: none;
@@ -102,7 +104,7 @@ a, a:focus{
 	background-color: none;
 }
 
-img{
+img, a {
     -khtml-user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -123,10 +125,16 @@ img{
 	max-height: 600px;
 }
 
+@media (max-width: 1400px) {
+	#img-display {
+		left: 10%;
+	}
+}
+
 #msg-content {
 	margin-top: 40px;
 	margin-bottom: 5px;	
-	margin-left: 18%;	
+	margin-left: 19%;	
 	width: 60%;
 	height: 1.2em;
 	font-size:1em;
@@ -139,7 +147,7 @@ img{
 
 #msg-content2 {
 	margin: 5px 40px;
-	margin-left: 18%;	
+	margin-left: 19%;	
 	width: 60%;
 	height: 1.2em;
 	font-size:1em;
@@ -153,6 +161,7 @@ img{
 #username {
 	position: relative;
 	left: 30%;
+	top: 5px;
 	height: 1.2em;
 	text-align: center;
 	font-size:1em;
@@ -160,17 +169,19 @@ img{
 	border-radius: 5%;
 	border-width: 2px;
 	background: rgba(255, 255, 255, 0.5);
+	float: left;
 }
 
 #msg-submit {
 	margin-left: 32%;
 	font-size:1em;
-	border: black solid;
+	padding-top: 5px;
+	border: none;
+	/*border: black solid;
 	border-radius: 20%;
-	border-width: 2px;
+	border-width: 2px;*/
 	background-color: Transparent;
     color: black;
-    padding: 3px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -197,4 +208,108 @@ img{
 	text-align: center;
 	font-size:1em;
 	cursor: pointer;
+}
+
+#infoPages {
+	position: fixed;
+	top: 2%;
+	left: 3%;
+	text-decoration: none;
+	-khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#aboutPage, #favPage {
+	color: gray;
+	opacity: 0.5;
+}
+
+#aboutPage:hover, #favPage:hover { 
+	color:  #3385ff; 
+	opacity: 1;
+}
+
+/***** below is for fav.html *****/
+
+/*#demoArea {
+	margin: 10px;
+}
+
+.imgArea {
+	float:left;
+	position:relative;
+	left: 10%;
+	top: 5%;
+	width: 40%;
+	height: 30%;
+}
+*/
+
+.author {
+	display: none;
+	position: absolute;
+	top: 25%;
+   	left: 30%;
+	font-size: 1em;
+	text-align: center;
+}
+.caption {
+	display: none;
+}
+
+.gallery {
+  width: 1270px;
+  margin: 4% 5.5%;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+.gallery > div {
+  position: relative;
+  float: left;
+  padding: 5px;
+}
+
+.gallery > div > img {
+  display: block;
+  margin-left: 5%;
+  width: 300px;
+  transition: .1s transform;
+  transform: translateZ(0); /* hack */
+
+  -webkit-filter: grayscale(80%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(80%);
+}
+
+.gallery > div:hover {
+  z-index: 1;
+}
+
+.gallery > div:hover > img {
+  transform: scale(1.7,1.7);
+  transition: .3s transform;
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(0%);
+
+}
+
+.cf:before, .cf:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.cf:after {
+  clear: both;
+}
+
+h2{
+  margin: 60px 0;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
 }
