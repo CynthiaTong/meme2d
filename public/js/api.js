@@ -15,9 +15,10 @@ $(document).ready(function() {
         if (keyCode == 27) $("#back-to-page").click();
     });
 
+    var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
+
     $("#initBtn").click(function() {
-    	
-    	var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
+
 		var picCount = 0;
 
 		//display every img in the picArray 
