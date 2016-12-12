@@ -1,2 +1,2 @@
-# meme2d
-Mashups final project
+# meme2D
+Mashups final project, Fall 2016.
