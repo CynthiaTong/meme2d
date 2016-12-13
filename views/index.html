@@ -17,40 +17,22 @@
 	<body>
 
 		<button id="initBtn">
-			<img src = "/media/shapes.png" width = "50" height = "50" />
+			<img src = "/media/images/shapes.png" width = "50" height = "50" />
 		</button>
 		<div id="selectArea" style = "display: none;">
 			<a href = "#" id= "triPic">	
-				<img class= "pics" id= "0" src = "/media/triangle.png" width = "80" height = "80"/>
-				<img class= "pics" id= "1" src = "/media/rect.png" width = "80" height = "80" />
-				<img class= "pics" id= "2" src = "/media/pentagon.png" width = "80" height = "80" />
-				<img class= "pics" id= "3" src = "/media/trapezoid.png" width = "80" height = "80"/>
-				<img class= "pics" id= "4" src = "/media/paral.png" width = "80" height = "80" />
+				<img class= "pics" id= "0" src = "/media/images/triangle.png" width = "80" height = "80"/>
+				<img class= "pics" id= "1" src = "/media/images/rect.png" width = "80" height = "80" />
+				<img class= "pics" id= "2" src = "/media/images/pentagon.png" width = "80" height = "80" />
+				<img class= "pics" id= "3" src = "/media/images/trapezoid.png" width = "80" height = "80"/>
+				<img class= "pics" id= "4" src = "/media/images/paral.png" width = "80" height = "80" />
 			</a>
-
-		<!-- 	<a href = "#" id= "triPic">	
-				<img src = "/media/triangle.png" width = "80" height = "80" />
-			</a>
-			<a href = "#" id= "rectPic">
-				<img src = "/media/rect.png" width = "90" height = "90" />
-			</a>
-			<a href = "#" id= "cirPic">
-				<img src = "/media/pentagon.png" width = "90" height = "90" />
-			</a>
-			<a href = "#" id= "trapPic">
-				<img src = "/media/trapezoid.png" width = "80" height = "80" />
-			</a>
-			<a href = "#" id= "paralPic">
-				<img src = "/media/paral.png" width = "80" height = "80" />
-			</a> -->
-			<!-- <p id="selectionGuide">Hey, click on one shape above, then wait till something falls down :)</p>
-			<p id="clickGuide" style = "display: none;">Or, doubleclick on one shape below, then wait till something shows up :D</p> -->
 
 		</div>
 
 		<div id="msgArea" style = "display: none;">
 			<button id="back-to-page">
-				<img src="/media/back.png" alt="back-to-page" witdth = "40" height = "40">
+				<img src="/media/images/back.png" alt="back-to-page" title="back to page" width = "40" height = "40">
 			</button>
 			<p id="content-display"></p>
 			<img id="img-display" alt ="meme image">
@@ -58,9 +40,14 @@
 			<textarea name="msg2" id="msg-content2" placeholder="Bottom Text On the Above Meme"></textarea>
 			<input type="text" name="username" id="username" placeholder="Your Name?"/>
 			<button id="msg-submit">
-			<img src="/media/submit.png" alt="submit" witdth = "30" height = "30">
+				<img src="/media/images/submit.png" alt="submit" title="update the meme" width = "30" height = "30">
 			</button>
+			<button id="favBtn">
+				<img src= "/media/images/share.png" alt="share-to-favorite" title="share to favorites" width = "30" height = "30">
+			</button>
+			<p id="clickGuide"></p>
 			<p id="updateCount"></p>
+
 		</div>
 		<div class="infoPages">
 			<a id="aboutPage" href="https://github.com/CynthiaTong/meme2d" target="_blank">About</a>
@@ -73,6 +60,8 @@
 			var clickCount;
 			var backedToPage = false;
 			var shapeNum;
+			var myFont;
+
 		</script>
 
 		<script type="text/javascript" src="/lib/p5.js"></script>

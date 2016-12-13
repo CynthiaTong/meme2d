@@ -1,5 +1,5 @@
 var showMsgArea = false;
-var nDiv = 10;
+var nDiv = 7;
 
 function backtoSelection() {
 	showMsgArea = false;
@@ -89,7 +89,7 @@ function Trapezoid(x, y) {
   	if (velocity.x === 0 && velocity.y === 0) {
 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
-
+            textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!", pos.x + 10, pos.y - 50);
             // time = millis();
@@ -201,7 +201,7 @@ function Parals(x,y) {
     if (velocity.x === 0 && velocity.y === 0) {
 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
-
+            textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!", pos.x + 10, pos.y - 50);
             // time = millis();
@@ -304,7 +304,7 @@ function Triangle(x, y) {
     if (velocity.x === 0 && velocity.y === 0) {
 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
-
+            textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!", pos.x + 10, pos.y - 50);
             // time = millis();
@@ -393,7 +393,7 @@ function Box(x, y) {
     if (velocity.x === 0 && velocity.y === 0) {
 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
-
+            textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!!", pos.x + 10, pos.y - 50);
             // time = millis();
@@ -496,7 +496,7 @@ function Pentagon(x, y) {
     if (velocity.x === 0 && velocity.y === 0) {
 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
-
+            textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!", pos.x + 10, pos.y - 50);
             // time = millis();

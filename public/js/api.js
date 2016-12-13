@@ -15,7 +15,6 @@ $(document).ready(function() {
         if (keyCode == 27) $("#back-to-page").click();
     });
 
-    // var picArray = ["/media/triangle.png", "/media/rect.png", "/media/pentagon.png", "/media/trapezoid.png", "/media/paral.png"];
 
     $("#initBtn").click(function() {
 
@@ -173,6 +172,7 @@ function postMemes(data) {
 			$("#username").val("");
 			$("#msg-content").val("");	
 			$("#msg-content2").val("");
+			$("#clickGuide").html("Meme shared, click 'favorites' (top left) to see it!");
 		}
 		});
 	
@@ -216,11 +216,15 @@ function getUpdatedMemes(d){
 			}
 			// if not exist in array, add it 
 			if (!inObj) objArray.push(d);
-			//post to cloudant  
-			postMemes(d);
 
+			$("#clickGuide").html("To share this meme, click the share button above!");
+			$("#favBtn").click(function() {
+				//post to cloudant  
+				postMemes(d);
+			});
+			
 			//display update count 
-			if (d.updated > 1) $("#updateCount").html("This meme has been updated <strong>"+ d.updated + "</strong> times.<br> See previous changes in the meme gallery!" + 
+			if (d.updated > 1) $("#updateCount").html("This meme has been updated <strong>"+ d.updated + "</strong> times." + 
 				 					"<br>Btw, its shape just got a bit bigger due to your update :).");
 			else $("#updateCount").html("<strong>You</strong> are the first person who gave text to this meme!" + 
 				 					"<br>Btw, its shape just got a bit bigger due to your update :).");

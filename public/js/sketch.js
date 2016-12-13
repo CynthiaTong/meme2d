@@ -19,6 +19,10 @@ var init = false;
 var num = 0;
 var last = 0;
 
+function preload() {
+  myFont = loadFont("/media/fonts/OpenSans-Regular.ttf");
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 

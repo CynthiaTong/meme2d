@@ -103,6 +103,7 @@ a, a:focus{
 	border-color: rgb(230, 240, 255);
 	border-radius: 5%;
 	background-color: none;
+	font-family: "Muli", helvetica;
 }
 
 img, a {
@@ -144,6 +145,7 @@ img, a {
 	border-radius: 5%;
 	border-width: 2px;
 	background: rgba(255, 255, 255, 0.5);
+	font-family: "Muli", helvetica;
 }
 
 #msg-content2 {
@@ -157,6 +159,7 @@ img, a {
 	border-radius: 5%;
 	border-width: 2px;
 	background: rgba(255, 255, 255, 0.5);
+	font-family: "Muli", helvetica;
 }
 
 #username {
@@ -166,6 +169,7 @@ img, a {
 	height: 1.2em;
 	text-align: center;
 	font-size:1em;
+	font-family: "Muli", helvetica;
 	border: black solid;
 	border-radius: 5%;
 	border-width: 2px;
@@ -190,7 +194,20 @@ img, a {
     outline: none;
 }
 
-#updateCount {
+#favBtn {
+	margin-left: 1.5%;
+	padding-top: 5px;
+	border: none;
+	background-color: Transparent;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+}
+
+#updateCount, #clickGuide {
 	position: relative;
 	left: 5px;
 	text-align: center;
