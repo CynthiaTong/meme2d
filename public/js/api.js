@@ -62,9 +62,9 @@ $(document).ready(function() {
 			$("#img-display").attr("width" , 700); 
 			$("#img-display").attr("height" , 700*1.0*item.height*1.0/item.width*1.0); 
 		}
-		if (item.height > 350) {
-			$("#img-display").attr("width" , 350*1.0*item.width*1.0/item.height*1.0); 
-			$("#img-display").attr("height" , 350);
+		if (item.height > 400) {
+			$("#img-display").attr("width" , 400*1.0*item.width*1.0/item.height*1.0); 
+			$("#img-display").attr("height" , 400);
 		}
 
 		//if all the memes are used, start from beginning 

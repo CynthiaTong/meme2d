@@ -43,7 +43,7 @@ function Trapezoid(x, y) {
   this.body.CreateFixture(fd);
 
   //Some additional stuff
-  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + (10, 20), random(-40, -10) + (3,5)));
+  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
   this.color = color(random(100,250), random(100,250), random(100,250));
@@ -158,7 +158,7 @@ function Parals(x,y) {
   this.body.CreateFixture(fd);
 
   //Some additional stuff
-  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + (10, 20), random(-40, -10) + (3,5)));
+  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
   this.color = color(random(100,250), random(100,250), random(100,250));
@@ -260,7 +260,7 @@ function Triangle(x, y) {
   this.body.CreateFixture(fd);
 
   //Some additional stuff
-  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + (10, 20), random(-40, -10) + (3,5)));
+  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
   this.color = color(random(100,250), random(100,250), random(100,250));
@@ -359,7 +359,7 @@ function Box(x, y) {
   this.body.CreateFixture(fd);
 
   // Some additional stuff
-  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + (10, 20), random(-40, -10) + (3,5)));
+  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
   this.color = color(random(100,250), random(100,250), random(100,250));
@@ -453,7 +453,7 @@ function Pentagon(x, y) {
   this.body.CreateFixture(fd);
 
   //Some additional stuff
-  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + (10, 20), random(-40, -10) + (3,5)));
+  this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
   this.color = color(random(100,250), random(100,250), random(100,250));
