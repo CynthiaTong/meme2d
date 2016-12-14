@@ -246,6 +246,23 @@ function getUpdatedMemes(d){
 	});
 }
 
+function getFavMemes() {
+
+	//return the ajax data 
+	return $.ajax({
+		url: '/api/favorites',
+		type: 'GET',
+		dataType: 'json',
+		error: function(data){
+			console.log(data);
+			alert("Cannot get data. Try refresh?");
+		},
+		success: function(data){
+			console.log("Got fav data");
+		}
+	});
+}
+
 //function to shuffle memeArray 
 function shuffle(array) {
 
