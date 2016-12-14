@@ -24,14 +24,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-var CLOUDANT_USERNAME="YOUR-USERNAME";
+var CLOUDANT_USERNAME="stasdfr";
 // The name of your database
-var CLOUDANT_DATABASE="YOUR-DB";
+var CLOUDANT_DATABASE="mashups_box2d";
 // These two are generated from your Cloudant dashboard of the above database.
-var CLOUDANT_KEY="";
-var CLOUDANT_PASSWORD="";
-
-var CLOUDANT_URL = "https://" + CLOUDANT_USERNAME + ".cloudant.com/" + CLOUDANT_DATABASE;
+var CLOUDANT_KEY="andrestedeentandembefore";
+var CLOUDANT_PASSWORD="6dd7b44412de3721db2772396b48d5751ad0f87f";
 
 // GET - route to load the main page
 app.get("/", function (req, res) {
@@ -104,8 +102,8 @@ app.get("/get/:key/:text/:text1", function(request, response) {
 
 	var baseUrl = "https://api.imgflip.com/caption_image?";
 	var memeID = id;
-	var username = "IMGFLIP-USERNAME";
-	var password = "IMGFLIP-PASSWORD";
+	var username = "adffdsaf";
+	var password = "Cynthia0206";
 	var topText = text;
 	var bottomText = text1;
 
