@@ -15,12 +15,15 @@
 	</head>
 
 	<body>
-
+		<div id="introGuide">
+		<p id="p1">Hi. This is meme2D, a website where you can drag shapes with your mouse,</p><p id="p2">generate your own favorite memes, and share to our "favorites" page!</p> 
+		<p id="p3">Sounds cool? Click on the button below to start.</p>
+		</div>
 		<button id="initBtn">
 			<img src = "/media/images/shapes.png" width = "50" height = "50" />
 		</button>
 		<div id="selectArea" style = "display: none;">
-			<a href = "#" id= "triPic">	
+			<a id= "triPic">	
 				<img class= "pics" id= "0" src = "/media/images/triangle.png" width = "80" height = "80"/>
 				<img class= "pics" id= "1" src = "/media/images/rect.png" width = "80" height = "80" />
 				<img class= "pics" id= "2" src = "/media/images/pentagon.png" width = "80" height = "80" />
@@ -36,16 +39,16 @@
 			</button>
 			<p id="content-display"></p>
 			<img id="img-display" alt ="meme image">
-			<textarea name="msg" id="msg-content" placeholder="Top Text On the Above Meme"></textarea>
-			<textarea name="msg2" id="msg-content2" placeholder="Bottom Text On the Above Meme"></textarea>
-			<input type="text" name="username" id="username" placeholder="Your Name?"/>
+			<input name="msg" class="userinput" id="msg-content" placeholder="Top Text On the Above Meme">
+			<input name="msg2" class="userinput" id="msg-content2" placeholder="Bottom Text On the Above Meme"> 
+			<input type="text" class="userinput" id="username" placeholder="Your Name?">
 			<button id="msg-submit">
 				<img src="/media/images/submit.png" alt="submit" title="update the meme" width = "30" height = "30">
 			</button>
 			<button id="favBtn">
-				<img src= "/media/images/share.png" alt="share-to-favorite" title="share to favorites" width = "30" height = "30">
+				Share to Favorites Page
+				<!-- <img src= "/media/images/share.png" alt="share-to-favorite" title="share to favorites" width = "30" height = "30"> -->
 			</button>
-			<p id="clickGuide"></p>
 			<p id="updateCount"></p>
 
 		</div>

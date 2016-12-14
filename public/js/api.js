@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 	// getJokes();
+
 	getMemes();
 
 	clickCount = -1;
@@ -17,7 +18,8 @@ $(document).ready(function() {
 
 
     $("#initBtn").click(function() {
-
+    	$("#introGuide").hide();
+    	
 		var counter = 0;
 
 		setInterval(function() {
@@ -90,6 +92,8 @@ $(document).ready(function() {
 		obj.text =  $("#msg-content").val();
 		obj.text1 = $("#msg-content2").val();
 
+		$("#msg-submit").attr("disabled", true);
+
 		if (obj.username !== "" && obj.text !== "" && obj.text1 !== "") {
 			getUpdatedMemes(obj);
 
@@ -106,7 +110,6 @@ $(document).ready(function() {
 		$("#msg-content2").val("");
 
 		$("#selectionGuide").fadeIn(300);
-		$("#clickGuide").fadeIn(400);
 
 		backtoSelection();
 
@@ -114,9 +117,11 @@ $(document).ready(function() {
 		isPaused = false;
 	});
 
-	// $("#favPage").click(function() {
-	// 	getFavMemes();
-	// });
+	//prevent multiple entry of same text 
+	$(".userinput").on("input", function(e) {
+		$("#msg-submit").attr("disabled", false);
+	});
+
 });
 
 //get all the memes in an array 
@@ -172,7 +177,8 @@ function postMemes(data) {
 			$("#username").val("");
 			$("#msg-content").val("");	
 			$("#msg-content2").val("");
-			$("#clickGuide").html("Meme shared, click 'favorites' (top left) to see it!");
+			$("#favBtn").fadeOut(200);
+			$("#clickGuide").html("Meme is shared, click 'favorites' (top left) to see it!");
 		}
 		});
 	
@@ -217,7 +223,7 @@ function getUpdatedMemes(d){
 			// if not exist in array, add it 
 			if (!inObj) objArray.push(d);
 
-			$("#clickGuide").html("To share this meme, click the share button above!");
+			$("#favBtn").show();
 			$("#favBtn").click(function() {
 				//post to cloudant  
 				postMemes(d);
@@ -268,6 +274,19 @@ function shuffle(array) {
 
   return array;
 }
+
+// $("body").on('mouseover', 'a', function (e) {
+//     var $link = $(this),
+//         href = $link.attr('href') || $link.data("href");
+
+//     $link.off('click.chrome');
+//     $link.on('click.chrome', function () {
+//         window.location.href = href;
+//     })
+//     .attr('data-href', href) //keeps track of the href value
+//     .css({ cursor: 'pointer' })
+//     .removeAttr('href'); // <- this is what stops Chrome to display status bar
+// });
 
 //*** Unused code ***//
 

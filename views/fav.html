@@ -3,7 +3,7 @@
 	<head>
 	    <meta charset="utf-8">
 		<title>meme2D Favorites</title>
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="/css/fav.css" />
 		<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
 		<link rel="apple-touch-icon" sizes="120x120" href="/media/favicons/apple-touch-icon.png">
@@ -22,42 +22,16 @@
 		<h2>Our All-Time Favorite Memes</h2>
 		<div id="demoArea" class="gallery cf">
 		</div>
-	<!-- 	<a id="scroll-left" onclick="plusDivs(-1)">Left</a>
-		<a id="scroll-right" onclick="plusDivs(1)">Right</a> -->
+
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<script type="text/javascript" src="/js/api.js"></script>
+		<script type="text/javascript" src="/js/fav.js"></script>
 		<script>
 			var memesArray = [];
 			var objArray = [];
 			var clickCount;
 			var backedToPage = false;
 			var shapeNum;
-
-			$(document).ready(function() {
-				var promise = getFavMemes();
-
-				promise.success(function(data) {
-					console.log(data);
-					renderData(data);
-				});
-
-			});
-
-			function renderData(dataArray) {
-
-				for (var i=0; i<dataArray.length; ++i) {
-					$("#demoArea").append("<div class='demos'> <img class='imgArea' src=' " + dataArray[i].doc.memeInfo.link + " '>" + 
-						"<div class='author'>Created By: " + dataArray[i].doc.username + "</div>"+
-						"<div class='caption'>Original Caption: " + dataArray[i].doc.memeInfo.caption + "</div></div>");
-
-						var item = dataArray[i].doc.memeInfo;
-
-						$(".imgArea").attr("width" , 400); 
-						$(".imgArea").attr("height" , 400*1.0*item.height*1.0/item.width*1.0);
-				}
-
-			}
-
 		</script>
 	</body>
 </html>

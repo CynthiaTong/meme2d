@@ -118,7 +118,7 @@ function mousePressed() {
 
 			  		$("#msgArea").css({"background-color": shape[j].color});
 			  		$("#msgArea").fadeIn(500);
-			  		$("#clickGuide").hide();
+			  		$("#favBtn").hide();
 					$("#selectArea").removeClass("disabled");
 
 		  		}
@@ -294,6 +294,7 @@ function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
 	terrain = new Terrain();
 }
+
 
 // var yInc = -20;
 //Change the hight (y value) based on the number of shapes added ? 

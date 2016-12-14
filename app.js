@@ -98,7 +98,7 @@ app.get("/get/:key/:text/:text1", function(request, response) {
 	var id = request.params.key;
 	var text = request.params.text;
 	var text1 = request.params.text1;
-	console.log(text1);
+	// console.log(text1);
 
 	var baseUrl = "https://api.imgflip.com/caption_image?";
 	var memeID = id;
@@ -108,7 +108,7 @@ app.get("/get/:key/:text/:text1", function(request, response) {
 	var bottomText = text1;
 
 	var postUrl = baseUrl + "template_id=" + memeID + "&username=" + username + "&password=" + password + "&text0=" + topText + "&text1=" + bottomText;
-	console.log(postUrl);
+	// console.log(postUrl);
 
 	Request.get({
 		url: postUrl,
@@ -117,7 +117,7 @@ app.get("/get/:key/:text/:text1", function(request, response) {
 	function (err, res, body){
 		//Grab the rows
 		var theData = body.data.url;
-		console.log(theData);
+		// console.log(theData);
 
 		if (res) {	
 			response.json(theData);
