@@ -39,6 +39,7 @@ app.get("/", function (req, res) {
 	res.render("index");
 });
 
+//the favorites page
 app.get("/favorites", function(req, res) {
 	console.log("In fav");
 	res.render("fav");
@@ -71,6 +72,7 @@ app.post("/post", function (request, response) {
 
 });
 
+//get data from DB
 app.get("/api/favorites", function(req, res) {
 
 	console.log('Making a db request for fav entries');

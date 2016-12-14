@@ -1,12 +1,15 @@
+
 var showMsgArea = false;
+//divider (update count to actual shape size change)
 var nDiv = 7;
+
 
 function backtoSelection() {
 	showMsgArea = false;
-  backedToPage = true;
+  	backedToPage = true;
 
 	$("#msgArea").fadeOut(200);
-  $("#selectArea").fadeIn(200);
+  	$("#selectArea").fadeIn(200);
 
 }
 
@@ -42,7 +45,7 @@ function Trapezoid(x, y) {
   // Attach the fixture
   this.body.CreateFixture(fd);
 
-  //Some additional stuff
+  //Velocities 
   this.body.SetLinearVelocity(new box2d.b2Vec2(random(-20, -10) + random(10, 20), random(-40, -10) + random(3,5)));
   this.body.SetAngularVelocity(random(-10,-5) + random(5, 10));
 
@@ -50,11 +53,10 @@ function Trapezoid(x, y) {
   $("#msgArea").css("background-color", this.color);
 
   var firstCheck = false;    
-  // var time = 0;
   var pressedOnce = false;
 
   this.n = 0;
-  // Drawing the box
+  // Draw the box
   this.display = function() {
 
 	// Get the body's position
@@ -62,10 +64,8 @@ function Trapezoid(x, y) {
 	// Get its angle of rotation
 	this.a = this.body.GetAngleRadians();
 
-	// Draw it!
 	var f = this.body.GetFixtureList();
 	this.ps = f.GetShape();
-
 
 	rectMode(CENTER);
 	push();
@@ -78,6 +78,7 @@ function Trapezoid(x, y) {
 	// For every vertex, convert to pixel vector
 	for (var i = 0; i < this.ps.m_count; i++) {
 	  var v = scaleToPixels(this.ps.m_vertices[i]);
+	  //use nDiv to determine actual size 
 	  vertex(v.x*(1+this.n/nDiv), v.y*(1+this.n/nDiv));
 	}
 	endShape(CLOSE);
@@ -85,17 +86,18 @@ function Trapezoid(x, y) {
 
 
 	var velocity = this.body.GetLinearVelocity();
-
+	//if the shape stops...
   	if (velocity.x === 0 && velocity.y === 0) {
 
+  		//reminds the user to drag the shape 
         if (!mouseIsPressed && !pressedOnce && backedToPage) {
             textFont(myFont);
             fill(120).strokeWeight(0).textSize(20);
             text("Hey, drag/doubleclick this!", pos.x + 10, pos.y - 50);
-            // time = millis();
             setTimeout(function() {pressedOnce = true;}, 6000);
         }
 
+        //when it first falls down to the ground, automatically show the meme area 
         if (!firstCheck) {
             firstCheck = true;
       		showMsgArea = true;
@@ -103,7 +105,7 @@ function Trapezoid(x, y) {
         }
   	}
 
-
+  	//show meme generator 
   	if (showMsgArea) {
   		$("#selectArea").hide();
   		$("#msgArea").fadeIn(500);
@@ -111,6 +113,7 @@ function Trapezoid(x, y) {
 
   };
 
+  //see if shape contains mouse 
   this.contains = function(x,y) {
     var worldPoint = scaleToWorld(x, y);
     var f = this.body.GetFixtureList();
@@ -537,7 +540,7 @@ function Pentagon(x, y) {
   };
 }
 
-//*** Unused code ***//
+//*** Unused circle constructor ***//
 
 // function Circle(x,y) {
 //   this.r = random(25, 35);
@@ -618,21 +621,3 @@ function Pentagon(x, y) {
 //   };
 
 // }
-
-// clear();
-  		// filter(GRAY);
-		
-		// rectMode(CENTER);
-		// push();
-		// translate(width/2,height/2);
-		// rotate(this.a);
-		// fill(this.color);
-		// stroke(120);
-		// strokeWeight(5);
-		// beginShape();
-		// 	for (var i = 0; i < this.ps.m_count; i++) {
-	 //  		var v = scaleToPixels(this.ps.m_vertices[i]);
-	 //  		vertex(v.x*12, v.y*12);
-		// }
-		// endShape(CLOSE);
-		// pop();

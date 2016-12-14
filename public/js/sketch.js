@@ -39,10 +39,9 @@ function setup() {
 	spring = new Spring();
 
 	$("#initBtn").click(function() {
-		console.log("initBtn clicked");
+		// console.log("initBtn clicked");
 		selectShape();
 	});
-
 	frameRate(60);
 }
 
@@ -55,13 +54,10 @@ function draw() {
 	//show terrain 
 	terrain.display();
 
-	//update wave 
-	// perlinWave();
-
 	if (init) {
 		displayShapes();
 	}
-
+	//enable mouse joint 
 	spring.update(mouseX,mouseY);
 	spring.display();
 
@@ -74,8 +70,7 @@ function mouseReleased() {
   	spring.destroy();
 }
 
-
-//Double mousePressed - show details
+//Single and Double mousePressed - show details (meme generator area)
 function mousePressed() {
 
 	for (var i=0; i<shapes.length; ++i) {
@@ -83,13 +78,15 @@ function mousePressed() {
 
 		for (var j=0; j<shape.length; ++j) {
 			if (shape[j].contains(mouseX, mouseY)){
+				//Single click - create mouse joint 
 				spring.bind(mouseX, mouseY, shape[j]);
 
+				//If double click...
 				if (frameCount - last < 20) {
 					var data;
-					if (objArray[shape[j].num] !== undefined) {
-						// console.log(objArray[shape[j].num]);
-						// console.log(shape[j].num);
+
+					if (objArray[shape[j].num]) {
+						//check if the data and the shape matches 
 						if (objArray[shape[j].num].num === shape[j].num) { 
 							//find the correct img link 
 							data = objArray[shape[j].num].memeInfo.link;
@@ -97,25 +94,20 @@ function mousePressed() {
 							//pass update count to shape 
 							var updateTimes = objArray[shape[j].num].updated;
 							shape[j].n = updateTimes;
-							// console.log(shape[j].n);
 
+							//update texts 
 							if (updateTimes > 1) $("#updateCount").html("This meme has been updated <strong>"+ updateTimes +
 													 "</strong> times.");
 							else if (updateTimes > 0) $("#updateCount").html("This meme has been updated <strong>1</strong> time.");
 							else $("#updateCount").html("This sad meme has <strong>never</strong> been updated. <br>Give it some attention by adding texts! ");
 							
-						// } else { 	
-						// console.log(objArray);
-						// // console.log(dataObj);
-						// console.log(objArray[shape[j].num]);
-						// // console.log(shape[j].num);
-						// data = memesArray[shape[j].num].link;
-						// $("#updateCount").html("This sad meme has <strong>never</strong> been updated. Give it some attention by adding texts!");
 						}
 					}
 					
+					//get img link 
 			  		$("#img-display").attr("src", data);
 
+			  		//settings for the meme generator 
 			  		$("#msgArea").css({"background-color": shape[j].color});
 			  		$("#msgArea").fadeIn(500);
 			  		$("#favBtn").hide();
@@ -127,9 +119,11 @@ function mousePressed() {
 		}
 	}
 
+	//timer for the doubleclick 
 	last = frameCount;
 }
 
+//update shape size according to update count 
 function updateSize() {
 
 	for (var i=0; i< shapes.length; ++i) {
@@ -142,6 +136,7 @@ function updateSize() {
 	}
 }
 
+//select shape from the selection button 
 function selectShape() {
 	$("#selectArea").fadeIn(600);
 	$("#initBtn").fadeOut(300);
@@ -150,6 +145,7 @@ function selectShape() {
 	$("#selectArea").click(function() {
 		// console.log(shapeNum);
 
+		//see shapeNum matches which constructor  
 		if (shapeNum === 0) {
 			var ts = new Triangle(mouseX, mouseY);
 			triangles.push(ts);
@@ -210,6 +206,7 @@ function selectShape() {
 	init = true;
 }
 
+//display everything 
 function displayShapes() {
 
 	for (var i = 0; i < boundaries.length; i++) {
@@ -296,31 +293,31 @@ function windowResized() {
 }
 
 
-// var yInc = -20;
-//Change the hight (y value) based on the number of shapes added ? 
-// function perlinWave() {
-// 	// stroke(179, 209, 255);
-// 	// fill(179, 209, 255);
+/*** Perlin Wave - not used 
+function perlinWave() {
+	stroke(179, 209, 255);
+	fill(179, 209, 255);
 
-// 	// beginShape();
+	beginShape();
 
-// 	// // if (yInc <= -(height*3/4)) {
-// 	// // 	yInc = 0.5;
-// 	// // }
+	// if (yInc <= -(height*3/4)) {
+	// 	yInc = 0.5;
+	// }
 
-// 	// var xOff = 0.0;
-// 	// var y;
+	var xOff = 0.0;
+	var y;
 
-// 	// for (var x=0; x< width+20; x+= 20) {
-// 	// 	y = map(noise(xOff, yOff), 0, 1, height,3*height/5);
-// 	// 	vertex(x,y);
-// 	// 	xOff += 0.05;	
-// 	// }
+	for (var x=0; x< width+20; x+= 20) {
+		y = map(noise(xOff, yOff), 0, 1, height,3*height/5);
+		vertex(x,y);
+		xOff += 0.05;	
+	}
 
-// 	// yOff += 0.01;
-// 	// // yInc -= 0.1;
+	yOff += 0.01;
+	// yInc -= 0.1;
 
-//  //  	vertex(width, height);
-//  // 	vertex(0, height);
-//  //  	endShape(CLOSE);
-// }
+  	vertex(width, height);
+ 	vertex(0, height);
+  	endShape(CLOSE);
+}
+***/

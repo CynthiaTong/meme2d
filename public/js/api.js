@@ -1,30 +1,37 @@
+/****** 
+This js document is meant to be used for the meme2D (meme2d.herokuapp.com) website. 
+It contains several button controls as well as API calls. 
+Created by Cynthia Xin Tong, Fall 2016. All rights reserved. 
+*****/
+
 
 $(document).ready(function() {
-	// getJokes();
-
+	//get the hundred memes from imgflip
 	getMemes();
 
 	clickCount = -1;
-	// var objArray = [];
 
 	//a flag to indicate if refreshImg is paused 
 	var isPaused = false;
 
+	//when user press "esc" or "enter", trigger back-to-page/submit button
 	$(document).keyup(function(event){ 
         var keyCode = event.which;   
         if (keyCode == 13) $("#msg-submit").click();
         if (keyCode == 27) $("#back-to-page").click();
     });
 
-
+	//when init button is clicked
     $("#initBtn").click(function() {
+
+    	//hide the intro texts 
     	$("#introGuide").hide();
-    	
+
+    	//cycle through five images of different shapes, change img every 120 ms 
 		var counter = 0;
-
 		setInterval(function() {
-			if (!isPaused) {
 
+			if (!isPaused) {
 				$(".pics").hide();
 				$("#"+counter).show();
 				shapeNum = counter;
@@ -36,12 +43,12 @@ $(document).ready(function() {
 				
     });
 
+    //when user selects a shape
 	$("#selectArea").click(function() {
-		// getQuotes();
-		clickCount += 1;
-		$("#selectionGuide").fadeOut(200);
 
-		//refreshImg is paused 
+		clickCount += 1;
+
+		//setInterval is paused 
 		isPaused = true;
 
 		//add a new obj to objArray 
@@ -69,8 +76,7 @@ $(document).ready(function() {
 		}
 
 		//if all the memes are used, start from beginning 
-		var memesArrayLength = memesArray.length;
-		if (clickCount >= memesArrayLength) {
+		if (clickCount >= memesArray.length) {
 			clickCount = -1;
 		}
 	});
@@ -91,10 +97,12 @@ $(document).ready(function() {
 		obj.username = $("#username").val();
 		obj.text =  $("#msg-content").val();
 		obj.text1 = $("#msg-content2").val();
-
+		//disable submit button temporarily to prevent multiple entries 
 		$("#msg-submit").attr("disabled", true);
 
+		//check input string 
 		if (obj.username !== "" && obj.text !== "" && obj.text1 !== "") {
+			//get updated meme 
 			getUpdatedMemes(obj);
 
 		}else {
@@ -109,15 +117,14 @@ $(document).ready(function() {
 		$("#msg-content").val("");	
 		$("#msg-content2").val("");
 
-		$("#selectionGuide").fadeIn(300);
-
+		//send signal to shape.js
 		backtoSelection();
 
-		//resume refreshImg 
+		//resume setInterval cycling shape images 
 		isPaused = false;
 	});
 
-	//prevent multiple entry of same text 
+	//reactivate submit button when user starts to enter something else 
 	$(".userinput").on("input", function(e) {
 		$("#msg-submit").attr("disabled", false);
 	});
@@ -126,9 +133,10 @@ $(document).ready(function() {
 
 //get all the memes in an array 
 function getMemes() {
+
 	var getUrl = "https://api.imgflip.com/get_memes";
+
 	$.ajax({
-		//mashape random-famous-quote url 
 	    url: getUrl, 
 	    type: 'GET', 
 	    dataType: 'json',
@@ -136,6 +144,7 @@ function getMemes() {
 	    	console.log("Success getting memes data"); 
 
 	    	for (var i=0; i < d.data.memes.length; i++) {
+
 	    		//create a meme obj and push to the memeArray 
 	    		var m = {
 		    		id: d.data.memes[i].id,
@@ -147,8 +156,7 @@ function getMemes() {
 
 				memesArray.push(m);
 	    	}
-	    	// console.log("memes array:");
-	    	// console.log(memesArray);
+	  
 	    	memesArray = shuffle(memesArray);
 	    },
 	    error: function(err) { 
@@ -160,8 +168,7 @@ function getMemes() {
 
 function postMemes(data) {
 
-		// console.log(JSON.stringify(data));
-		//save changes the use made to cloudant 
+		//save changes the user made to cloudant 
 		$.ajax( {
 		url: "/post", 
 		contentType: "application/json",
@@ -174,6 +181,7 @@ function postMemes(data) {
 		success: function(resp) {
 			console.log("Saved changes to DB.");
 
+			//reset 
 			$("#username").val("");
 			$("#msg-content").val("");	
 			$("#msg-content2").val("");
@@ -198,21 +206,21 @@ function getUpdatedMemes(d){
 		dataType: "json",
 		type: "GET",
 		error: function (err) {
-			// console.log(resp);
 			alert("Cannot get updates. Please try again.");
 		},
 		success: function(data) {
 			console.log("Got new meme.");
-			// console.log(data);
+			
 			//display the updated img 
 			$("#img-display").attr("src", data);
 
 			d.memeInfo.link = data;
-			//increase the update count 
 
+			//increase the update count 
 			d.updated += 1;
 
 			var inObj = false;
+
 			//if the meme is already in  objArray, update the original 
 			for (var i=0; i < objArray.length; ++i) {
 				if (d.memeInfo.id === objArray[i].memeInfo.id) {
@@ -238,29 +246,13 @@ function getUpdatedMemes(d){
 	});
 }
 
-function getFavMemes() {
-
-	//return the ajax data 
-	return $.ajax({
-		url: '/api/favorites',
-		type: 'GET',
-		dataType: 'json',
-		error: function(data){
-			console.log(data);
-			alert("Cannot get data. Try refresh?");
-		},
-		success: function(data){
-			console.log("Got fav data");
-			// console.log(data);
-		}
-	});
-}
-
+//function to shuffle memeArray 
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+  	var currentIndex = array.length, temporaryValue, randomIndex;
+
+  	// While there remain elements to shuffle...
+  	while (0 !== currentIndex) {
 
     // Pick a remaining element...
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -274,60 +266,3 @@ function shuffle(array) {
 
   return array;
 }
-
-// $("body").on('mouseover', 'a', function (e) {
-//     var $link = $(this),
-//         href = $link.attr('href') || $link.data("href");
-
-//     $link.off('click.chrome');
-//     $link.on('click.chrome', function () {
-//         window.location.href = href;
-//     })
-//     .attr('data-href', href) //keeps track of the href value
-//     .css({ cursor: 'pointer' })
-//     .removeAttr('href'); // <- this is what stops Chrome to display status bar
-// });
-
-//*** Unused code ***//
-
-// function getQuotes() {
-// 	$.ajax({
-// 		//mashape random-famous-quote url 
-// 	    url: 'https://andruxnet-random-famous-quotes.p.mashape.com/', 
-// 	    type: 'GET', 
-// 	    dataType: 'json',
-// 	    success: function(d) { 
-// 	    	console.log(d); 
-// 	    	$("#content-display").html("<p>" + d.quote + "<br> --" + d.author + "</p>");
-	    	
-// 			var data = {
-// 				author: d.author,
-// 				quote: d.quote,
-// 			};
-// 			console.log(data);
-// 	    },
-// 	    error: function(err) { 
-// 	    	console.log(err); 
-// 	    },
-// 	    beforeSend: function(xhr) {
-// 	    	// Enter here your Mashape key
-// 	    	xhr.setRequestHeader("X-Mashape-Authorization", "i772joYZnymshQNpa2IFJmClEKtAp1d5UBXjsnoOrxuj0oPm7Y"); 
-// 	    }
-// 	});
-// }
-
-// function getJokes() {
-
-// 	$.ajax({
-// 		url: "http://tambal.azurewebsites.net/joke/random",
-// 		type: "GET",
-// 		dataType: "jsonp",
-// 		error: function(err) {
-// 			console.log("Error loading data!");
-// 		},
-// 		success: function(data) {
-// 			console.log(data.joke);
-// 		}
-
-// 	});
-// }

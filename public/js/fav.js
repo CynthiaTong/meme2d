@@ -1,13 +1,30 @@
 
 $(document).ready(function() {
-	var promise = getFavMemes();
 
+	var promise = getFavMemes();
+	//if success, render received data 
 	promise.success(function(data) {
-		console.log(data);
 		renderData(data);
 	});
 
 });
+
+function getFavMemes() {
+
+	//return the ajax data 
+	return $.ajax({
+		url: '/api/favorites',
+		type: 'GET',
+		dataType: 'json',
+		error: function(data){
+			console.log(data);
+			alert("Cannot get data. Try refresh?");
+		},
+		success: function(data){
+			console.log("Got fav data");
+		}
+	});
+}
 
 function renderData(dataArray) {
 
@@ -18,6 +35,7 @@ function renderData(dataArray) {
 
 			var item = dataArray[i].doc.memeInfo;
 
+			//adjust img size 
 			$(".imgArea").attr("width" , 400); 
 			$(".imgArea").attr("height" , 400*1.0*item.height*1.0/item.width*1.0);
 	}
