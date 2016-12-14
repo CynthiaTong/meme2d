@@ -1,5 +1,5 @@
 # meme2D
-## (https://meme2d.herokuapp.com)
+## https://meme2d.herokuapp.com
 Mashups final project, Fall 2016. Design and created by Cynthia Xin Tong. 
 
 ###Features and Dependencies: 
