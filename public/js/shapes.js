@@ -102,6 +102,9 @@ function Trapezoid(x, y) {
             firstCheck = true;
       		showMsgArea = true;
       		$("#selectArea").removeClass("disabled");
+      		//clear the clickGuide
+			$("#clickGuide").html("");
+
         }
   	}
 
@@ -215,6 +218,8 @@ function Parals(x,y) {
             firstCheck = true;
             showMsgArea = true;
             $("#selectArea").removeClass("disabled");
+			//clear the clickGuide
+			$("#clickGuide").html("");
         }
     }
 
@@ -318,6 +323,8 @@ function Triangle(x, y) {
             firstCheck = true;
             showMsgArea = true;
             $("#selectArea").removeClass("disabled");
+			//clear the clickGuide
+			$("#clickGuide").html("");
         }
     }
 
@@ -407,6 +414,8 @@ function Box(x, y) {
             firstCheck = true;
             showMsgArea = true;
             $("#selectArea").removeClass("disabled");
+			//clear the clickGuide
+			$("#clickGuide").html("");
         }
     }
 
@@ -510,6 +519,8 @@ function Pentagon(x, y) {
             firstCheck = true;
             showMsgArea = true;
             $("#selectArea").removeClass("disabled");
+			//clear the clickGuide
+			$("#clickGuide").html("");
         }
     }
     

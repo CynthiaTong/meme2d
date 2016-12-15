@@ -95,6 +95,9 @@ function mousePressed() {
 							var updateTimes = objArray[shape[j].num].updated;
 							shape[j].n = updateTimes;
 
+							//clear the clickGuide
+							$("#clickGuide").html("");
+
 							//update texts 
 							if (updateTimes > 1) $("#updateCount").html("This meme has been updated <strong>"+ updateTimes +
 													 "</strong> times.");
