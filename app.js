@@ -24,12 +24,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-var CLOUDANT_USERNAME = "stasdfr";
+var CLOUDANT_USERNAME = "";
 // The name of your database
-var CLOUDANT_DATABASE = "mashups_box2d";
+var CLOUDANT_DATABASE = "";
 // These two are generated from your Cloudant dashboard of the above database.
-var CLOUDANT_KEY = "youghtsinkinkintlydiffew";
-var CLOUDANT_PASSWORD = "9168ba2bfb716a82204fe3c07f5b7a1bbbf9a005";
+var CLOUDANT_KEY = "";
+var CLOUDANT_PASSWORD = "";
 
 var CLOUDANT_URL = "https://" + CLOUDANT_USERNAME + ".cloudant.com/" + CLOUDANT_DATABASE;
 
